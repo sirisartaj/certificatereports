@@ -42,7 +42,7 @@ $routes->set404Override();
  */
 $routes->get('/', 'CertificateController::index');
 $routes->post('/', 'CertificateController::index');
-);
+
 
 
 
