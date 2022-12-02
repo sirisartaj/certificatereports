@@ -41,7 +41,11 @@ $routes->set404Override();
  * --------------------------------------------------------------------
  */
 $routes->get('/', 'CertificateController::index');
-$routes->post('/', 'CertificateController::index');
+$routes->post('/', 'CertificateController::seachresults');
+$routes->post('/seachresults', 'CertificateController::seachresults');
+$routes->get('/seachresults', 'CertificateController::seachresults');
+$routes->get('/ajaxhtml', 'CertificateController::ajaxhtml');
+$routes->post('/ajaxhtml', 'CertificateController::ajaxhtml');
 
 
 

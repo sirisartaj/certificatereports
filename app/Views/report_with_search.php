@@ -1,10 +1,10 @@
  <!--<script type="text/javascript" src="https://sirians.xyz/dgtl/js/bootstrap-datepicker.js"></script>  Bootstrap Date Picker 
 <script type="text/javascript" src="https://sirians.xyz/dgtl/js/bootstrap-datetimepicker-new.js"></script> Bootstrap New Date Picker --> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css" integrity="sha512-Fppbdpv9QhevzDE+UHmdxL4HoW8HantO+rC8oQB2hCofV+dWV2hePnP5SgiWR1Y1vbJeYONZfzQc5iII6sID2Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css"  />
  <!-- BEGIN PAGE CONTENT -->
     <div class="page-content">
       <div class="header">
@@ -25,7 +25,7 @@
 			  <label class="control-label">From Date</label>
 				<div class="append-icon-default">
                   <div class="date form-date">
-                    <input type="text" class="form-control form-white datetimepicker1" placeholder="Select date" name="from_date" value="<?php echo $from_date;?>">
+                    <input type="text" class="form-control form-white datetimepicker1" placeholder="Select date" id="from_date" name="from_date" value="<?php echo $from_date;?>">
                     <span class="add-on"><i class="icon-th"></i></span> </div>
                   <i class="icon-calendar default-date-icon"></i> </div>
 			 </div>
@@ -35,7 +35,7 @@
 			  <label class="control-label">To Date</label>
 				<div class="append-icon-default">
                   <div class="date form-date">
-                    <input type="text" class="form-control form-white datetimepicker1" placeholder="Select date" name="to_date" value="<?php echo $to_date;?>">
+                    <input type="text" class="form-control form-white datetimepicker1" placeholder="Select date" id="to_date" name="to_date" value="<?php echo $to_date;?>">
                     <span class="add-on"><i class="icon-th"></i></span> </div>
                   <i class="icon-calendar default-date-icon"></i> </div>
 			 </div>
@@ -49,7 +49,7 @@
 		
 		 <div class="row">
 			<div class="col-sm-12">
-			<button type="submit" class="btn btn-primary pull-left m-b-0">Search</button>
+			<button type="button" onClick="getreport();" class="btn btn-primary pull-left m-b-0">Search</button>
 			<div class="clear"></div>
 			</div>
 		</div>
@@ -112,8 +112,92 @@
       </div>
     </div>
     <!-- END PAGE CONTENT --> 
+    
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.13.1/api/fnReloadAjax.js">
+      
+    </script>
     <script type="text/javascript">
+function getreport(){
+  $('#input_buttons').DataTable().destroy();
+  
+var from_date= $('#from_date');
+      var to_date= $('#to_date');
+    oTable= $('#input_buttons').DataTable({
+        processing: true,
+          serverSide: true,
+          ajax: {
+              url: '<?php echo base_url().'/seachresults'?>',
+              type: 'POST',
+              data: {'from_date': $("#from_date").val(),'to_date':$("#to_date").val()},
+          },
+        
+        columns: [
+            { data: 'student_name' },
+            { data: 'course_name' },
+            { data: 'admission_number' },
+            { data: 'parent_firstname' },
+            { data: 'parent_mobile_number' },
+            { data: 'created_date' },
+            { data: 'certificate_id' },
+        ],
+    });
+}
+      $(document).ready(function () {
+
+        
+        var from_date= $('#from_date');
+      var to_date= $('#to_date');
+    oTable= $('#input_buttons').DataTable({
+        processing: true,
+          serverSide: true,
+          ajax: {
+              url: '<?php echo base_url().'/seachresults'?>',
+              type: 'POST',
+              data: {'from_date': $("#from_date").val(),'to_date':$("#to_date").val()},
+          },
+        
+        columns: [
+            { data: 'student_name' },
+            { data: 'course_name' },
+            { data: 'admission_number' },
+            { data: 'parent_firstname' },
+            { data: 'parent_mobile_number' },
+            { data: 'created_date' },
+            { data: 'certificate_id' },
+        ],
+    });
+});
+
+
+/*
     	$(function () {
-             $('.datetimepicker1').datetimepicker();
-         });
+             //$('.datetimepicker1').datetimepicker();
+         
+      var from_date= $('#from_date');
+      var to_date= $('#to_date');
+      var calltable = $('#input_buttons').dataTable({
+            
+            "ajax": {
+                "url": "<?php echo base_url().'/seachresults'?>",
+                "data": {
+                    "from_date": from_date,"to_date":to_date
+                },
+                "method":"post"
+            },
+            "columns": [
+                { "data": "student_name" },
+                { "data": "department" },
+                { "data": "number" },
+                { "data": "called" },
+                { "data": "counter" },
+                { "data": "recall" }
+            ]
+        });
+ 
+        setInterval(function(){
+            //calltable.api().ajax.reload(null,false);
+        }, 3000);
+});*/
+       
     </script>

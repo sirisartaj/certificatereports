@@ -17,6 +17,7 @@
 <link href="https://sirians.xyz/dgtl/css/layout.css" rel="stylesheet">
 <link href="https://sirians.xyz/dgtl/css/custom.css" rel="stylesheet">
 <link href="https://sirians.xyz/dgtl/css/step-form-wizard.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
 <script src="https://sirians.xyz/dgtl/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <!-- BEGIN BODY -->
@@ -423,7 +424,7 @@
     </div>
     <!-- END TOPBAR --> 
     
-   <?php echo view('report_with_search');?>
+   <?php echo view($view);?>
   </div>
   <!-- END MAIN CONTENT --> 
 </section>
