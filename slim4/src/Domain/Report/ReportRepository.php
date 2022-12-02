@@ -35,13 +35,14 @@ class ReportRepository
               ,(select sp.parent_firstname from tbl_student_parents sp where sp.student_id = s.student_id 
               order by sp.relation_type asc limit 1) as parent_firstname,(select sp.parent_mobile_number from tbl_student_parents sp where sp.student_id = s.student_id 
               order by sp.relation_type asc limit 1) as parent_mobile_number,
-               tc.course_name, tsec.section_name
+               tc.course_name, tsec.section_name,u.user_name
               from 
               tbl_taxcertificate_info c 
               right join tbl_student_academic sa on c.student_id = sa.student_id and c.year_id = sa.year_id and c.year_id = 11 and sa.promoted = 0
               left join tbl_student s on s.student_id = c.student_id
               left join tbl_course tc on tc.course_id = sa.course_id
               left join tbl_section tsec on tsec.section_id = sa.section_id
+              left join tbl_users u on u.user_id = c.created_by
               where 
               sa.promoted = 0 and c.year_id = 11 and (c.created_date BETWEEN '".$from_date."' AND '".$to_date."')";
       
@@ -51,7 +52,7 @@ class ReportRepository
       //echo count($res);exit;
       if(!empty($res)){
        $status = array(
-        "draw"=>1,
+        
         "recordsFiltered"=>count($res),
         "recordsTotal"=>count($res),
          "data" => $res);

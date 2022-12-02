@@ -76,6 +76,7 @@
                     <th class="dontprint">Mobile</th>
                     <th>approved date</th>
                     <th>certificate No.</th>
+                    <th>User Name</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -90,6 +91,7 @@
                     <td><?php echo $r->parent_mobile_number;?></td>
                     <td><?php echo $r->created_date;?></td>
                     <td><?php echo $r->certificate_id;?></td>
+                    <td><?php echo $r->user_name;?></td>
                   </tr>
 				  <?php	}
                 	} ?>
@@ -118,14 +120,15 @@
       
     </script>
     <script type="text/javascript">
-function getreport(){
-  $('#input_buttons').DataTable().destroy();
-  
-var from_date= $('#from_date');
+
+    
+function tabledata(){
+  var from_date= $('#from_date');
       var to_date= $('#to_date');
     oTable= $('#input_buttons').DataTable({
         processing: true,
           serverSide: true,
+          paging: true,
           ajax: {
               url: '<?php echo base_url().'/seachresults'?>',
               type: 'POST',
@@ -140,64 +143,20 @@ var from_date= $('#from_date');
             { data: 'parent_mobile_number' },
             { data: 'created_date' },
             { data: 'certificate_id' },
+            { data: 'user_name' },
         ],
     });
-}
-      $(document).ready(function () {
+  }
 
-        
-        var from_date= $('#from_date');
-      var to_date= $('#to_date');
-    oTable= $('#input_buttons').DataTable({
-        processing: true,
-          serverSide: true,
-          ajax: {
-              url: '<?php echo base_url().'/seachresults'?>',
-              type: 'POST',
-              data: {'from_date': $("#from_date").val(),'to_date':$("#to_date").val()},
-          },
-        
-        columns: [
-            { data: 'student_name' },
-            { data: 'course_name' },
-            { data: 'admission_number' },
-            { data: 'parent_firstname' },
-            { data: 'parent_mobile_number' },
-            { data: 'created_date' },
-            { data: 'certificate_id' },
-        ],
+
+    $(document).ready(function () {        
+      tabledata();
     });
-});
+    function getreport(){
+      $('#input_buttons').DataTable().destroy();
+      tabledata();
+    }
 
 
-/*
-    	$(function () {
-             //$('.datetimepicker1').datetimepicker();
-         
-      var from_date= $('#from_date');
-      var to_date= $('#to_date');
-      var calltable = $('#input_buttons').dataTable({
-            
-            "ajax": {
-                "url": "<?php echo base_url().'/seachresults'?>",
-                "data": {
-                    "from_date": from_date,"to_date":to_date
-                },
-                "method":"post"
-            },
-            "columns": [
-                { "data": "student_name" },
-                { "data": "department" },
-                { "data": "number" },
-                { "data": "called" },
-                { "data": "counter" },
-                { "data": "recall" }
-            ]
-        });
- 
-        setInterval(function(){
-            //calltable.api().ajax.reload(null,false);
-        }, 3000);
-});*/
        
     </script>
