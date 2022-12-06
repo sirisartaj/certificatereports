@@ -8,6 +8,7 @@ return function (App $app) {
   
   
   $app->post('/searchreport', \App\Action\Report\SearchReport::class);
+  $app->post('/lateattendencereport', \App\Action\Report\LateAttendenceReport::class);
 
    
 };

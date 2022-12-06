@@ -29,4 +29,9 @@ final class Report
     $User = $this->repository->searchReport($data);
     return $User;
   }
+  public function LateAttendenceReport($data) {
+    //print_r($data);exit;
+    $User = $this->repository->LateAttendenceReport($data);
+    return $User;
+  }
 }

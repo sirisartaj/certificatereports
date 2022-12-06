@@ -47,7 +47,12 @@ $routes->get('/seachresults', 'CertificateController::seachresults');
 $routes->get('/ajaxhtml', 'CertificateController::ajaxhtml');
 $routes->post('/ajaxhtml', 'CertificateController::ajaxhtml');
 
-
+$routes->get('/attendencelist', 'AttendenceController::index');
+$routes->post('/attendencelist', 'AttendenceController::seachresults');
+$routes->post('/attendenceseachresults', 'AttendenceController::seachresults');
+$routes->get('/attendenceseachresults', 'AttendenceController::seachresults');
+$routes->get('/attendenceajaxhtml', 'AttendenceController::ajaxhtml');
+$routes->post('/attendenceajaxhtml', 'AttendenceController::ajaxhtml');
 
 
 
